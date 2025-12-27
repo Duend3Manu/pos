@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>Bienvenida 👋</h3>
-<p>Selecciona una opción desde el menú</p>
+<h2 class="mb-4">Panel principal</h2>
+
+<div class="menu-grid">
+  <a href="/ventas" class="menu-btn">💰<span>Ventas</span></a>
+  <a href="/productos" class="menu-btn">🧁<span>Productos</span></a>
+  <a href="/cierre_caja" class="menu-btn">🧾<span>Cierre Caja</span></a>
+  <a href="/reportes/diario" class="menu-btn">📊<span>Reportes</span></a>
+</div>
 {% endblock %}

@@ -28,7 +28,7 @@ def format_clp(value):
 
 @app.route("/")
 def home():
-    return redirect(url_for("ventas"))
+    return render_template("index.html")
 
 
 @app.route("/productos")
