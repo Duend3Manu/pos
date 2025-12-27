@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>📊 Reportes</h3>
+
+<!-- REPORTE DIARIO -->
+<h5 class="mt-4">📅 Reporte Diario ({{ hoy }})</h5>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Método</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set ns_diario = namespace(total=0) %}
+        {% for r in diario %}
+        <tr>
+            <td>{{ r.metodo_pago|capitalize }}</td>
+            <td>${{ r.total | clp }}</td>
+        </tr>
+        {% set ns_diario.total = ns_diario.total + r.total %}
+        {% endfor %}
+        <tr class="table-success">
+            <th>Total Día</th>
+            <th>${{ ns_diario.total | clp }}</th>
+        </tr>
+    </tbody>
+</table>
+
+<!-- REPORTE MENSUAL -->
+<h5 class="mt-5">📆 Reporte Mensual ({{ mes }})</h5>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Método</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set ns_mensual = namespace(total=0) %}
+        {% for r in mensual %}
+        <tr>
+            <td>{{ r.metodo_pago|capitalize }}</td>
+            <td>${{ r.total | clp }}</td>
+        </tr>
+        {% set ns_mensual.total = ns_mensual.total + r.total %}
+        {% endfor %}
+        <tr class="table-success">
+            <th>Total Mes</th>
+            <th>${{ ns_mensual.total | clp }}</th>
+        </tr>
+    </tbody>
+</table>
+
+<a href="/ventas" class="btn btn-secondary mt-3">⬅ Volver</a>
+{% endblock %}

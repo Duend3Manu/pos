@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="mb-3">💰 Ventas</h3>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="row g-3">
+            {% for p in productos %}
+            <div class="col-md-3">
+                <div class="card producto text-center p-2">
+                    <img src="{{ p.imagen or '/static/img/default.png' }}">
+                    <b>{{ p.nombre }}</b>
+                    <span>${{ p.precio | clp }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <!-- Aquí irá el carrito / cobro en el futuro -->
+        <div class="card p-3">
+            <h5>🛒 Carrito</h5>
+            <p class="text-muted">Selecciona productos...</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

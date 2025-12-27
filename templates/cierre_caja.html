@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>🔒 Cierre de Caja</h3>
+
+<div class="pos-box mt-4">
+
+    <p><b>Total ventas:</b> ${{ total | default(0) | clp }}</p>
+    <p><strong>Efectivo sistema:</strong> ${{ efectivo | clp }}</p>
+    <p><strong>Tarjeta sistema:</strong> ${{ tarjeta | clp }}</p>
+    <p><strong>Transferencia sistema:</strong> ${{ transferencia | clp }}</p>
+
+    <hr>
+
+    <form method="POST">
+        <div class="fila">
+            <div>
+                <h4>Billetes</h4>
+                {% for b in billetes %}
+                    <label style="width: 80px; display: inline-block;">${{ b }}:</label>
+                    <input class="input-caja mb-2" type="number" name="b_{{ b }}" value="0"><br>
+                {% endfor %}
+            </div>
+            <div>
+                <h4>Monedas</h4>
+                {% for m in monedas %}
+                    <label style="width: 80px; display: inline-block;">${{ m }}:</label>
+                    <input class="input-caja mb-2" type="number" name="m_{{ m }}" value="0"><br>
+                {% endfor %}
+            </div>
+        </div>
+
+        <br>
+        <!-- Usamos las nuevas clases de botón para consistencia -->
+        <button class="btn btn-peligro" type="submit">🔒 Cerrar caja</button>
+    </form>
+
+</div>
+
+{% endblock %}

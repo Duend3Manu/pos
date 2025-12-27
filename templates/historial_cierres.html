@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>📊 Historial de Cierres de Caja</h3>
+
+<div class="pos-box mt-4">
+
+    <table class="table table-striped table-pos">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Total Sistema</th>
+                <th>(Efectivo)</th>
+                <th>(Tarjeta)</th>
+                <th>(Transf.)</th>
+                <th>Total Contado</th>
+                <th>Diferencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in cierres %}
+            <tr>
+                <td style="text-align: left;">{{ c.fecha }}</td>
+                <td style="text-align: left;">{{ c.usuario }}</td>
+                <td class="fw-bold">${{ c.total_ventas | clp }}</td>
+                <td class="text-muted">${{ c.efectivo_sistema | clp }}</td>
+                <td class="text-muted">${{ c.tarjeta_sistema | clp }}</td>
+                <td class="text-muted">${{ c.transferencia_sistema | clp }}</td>
+                <td class="fw-bold">${{ c.efectivo_real | clp }}</td>
+
+                <td class="fw-bold {% if c.diferencia < 0 %}text-danger{% elif c.diferencia > 0 %}text-success{% endif %}">
+                    ${{ c.diferencia | clp }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

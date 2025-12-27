@@ -1,0 +1,148 @@
+/* ====== GENERAL ====== */
+body {
+  overflow: hidden; /* Para evitar scroll doble si el contenido cabe */
+  background: #f5f6fa;
+  font-family: Arial, sans-serif;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+  width: 220px;
+  background-color: #d16ba5;
+  min-height: 100vh;
+  color: white;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.sidebar a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos generales para tablas de reportes */
+.table-pos {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.table-pos th, .table-pos td {
+    border: 1px solid #dee2e6;
+    padding: 12px;
+    text-align: right; /* Números a la derecha */
+}
+
+.table-pos th {
+    background: #343a40; /* Oscuro profesional */
+    color: white;
+    text-align: center;
+}
+
+.input-caja {
+  width: 100px;
+  text-align: right;
+  font-size: 16px;
+  padding: 6px;
+}
+
+.btn {
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primario {
+  background: #2e86de;
+  color: white;
+}
+
+.btn-peligro {
+  background: #c0392b;
+  color: white;
+}
+
+.fila {
+  display: flex;
+  gap: 24px; /* Aumentamos el espacio para mejor visualización */
+  margin-bottom: 10px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.menu-btn {
+  background: white;
+  border-radius: 18px;
+  height: 160px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  color: #2d3436;
+  font-size: 32px;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transition: transform .1s;
+}
+
+.menu-btn span {
+  font-size: 18px;
+  margin-top: 8px;
+}
+
+.menu-btn:hover {
+  transform: translateY(-4px);
+}
+
+/* ====== PRODUCTOS (POS) ====== */
+.producto {
+  cursor: pointer;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.producto:hover {
+  transform: scale(1.05);
+}
+
+.producto img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ====== LOGIN ====== */
+body.login-body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f6f9;
+}
+
+.card-login {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}

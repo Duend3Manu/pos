@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">💰 Venta</h2>
+
+<div class="row">
+
+    <!-- IZQUIERDA: agregar productos -->
+    <div class="col-md-4">
+        <div class="pos-box">
+            <h5>➕ Agregar producto</h5>
+
+            <form method="POST" action="/agregar_producto">
+                <label class="mt-2">Producto</label>
+                <select name="producto_id" class="form-select" required>
+                    {% for p in productos %}
+                    <option value="{{ p.id }}">
+                        {{ p.nombre }} (${{ p.precio | clp }})
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <label class="mt-2">Cantidad</label>
+                <input type="number" name="cantidad" class="form-control" min="1" required>
+
+                <button class="btn btn-success btn-pos w-100 mt-3">
+                    ➕ Agregar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DERECHA: ticket + pago -->
+    <div class="col-md-8">
+
+        <div class="pos-box mb-3">
+            <table class="table ticket-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cant</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in carrito %}
+                    <tr>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.cantidad }}</td>
+                        <td>${{ item.precio | clp }}</td>
+                        <td>${{ item.total | clp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="total-box mb-3">
+            TOTAL: ${{ total | clp }}
+        </div>
+
+        <div class="pos-box">
+            <form method="POST" action="/cobrar">
+
+                <label>Forma de pago</label>
+                <select name="forma_pago" class="form-select mb-3" onchange="mostrarPago(this.value)" required>
+                    <option value="">Seleccionar</option>
+                    <option value="efectivo">💵 Efectivo</option>
+                    <option value="tarjeta">💳 Tarjeta</option>
+                    <option value="transferencia">📱 Transferencia</option>
+                </select>
+
+                <div id="efectivo" style="display:none;">
+                    <label>¿Con cuánto paga?</label>
+                    <input type="number" step="1" min="0" name="paga_con" class="form-control mb-2">
+                </div>
+
+                <div id="transferencia" style="display:none;">
+                    <label>Nombre</label>
+                    <input type="text" name="nombre_transferencia" class="form-control mb-2">
+                    <label>RUT</label>
+                    <input type="text" name="rut_transferencia" class="form-control">
+                </div>
+
+                <button class="btn btn-primary btn-pos w-100 mt-3">
+                    💵 COBRAR
+                </button>
+            </form>
+
+            <a href="/cancelar_venta" class="btn btn-danger btn-pos w-100 mt-2">
+                ❌ CANCELAR
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function mostrarPago(tipo) {
+    document.getElementById("efectivo").style.display = "none";
+    document.getElementById("transferencia").style.display = "none";
+
+    if (tipo === "efectivo") {
+        document.getElementById("efectivo").style.display = "block";
+    }
+    if (tipo === "transferencia") {
+        document.getElementById("transferencia").style.display = "block";
+    }
+}
+</script>
+
+{% endblock %}
